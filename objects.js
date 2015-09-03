@@ -80,17 +80,32 @@ function intersectJobs(nameA, nameB) {
   return(_.intersection(first, second));
 }
 
+function similarity(personA, personB) {
+  var first = Object.keys(users[personA].badges).length;
+  var second =  Object.keys(users[personB].badges).length;
+  var combine = intersectJobs(personA, personB).length;
+  if (first > second) {
+    // console.log(combine/ first);
+    return _.round((combine / first), 2);
+  } else {
+    // console.log(combine / second);
+    return _.round((combine / second), 2);
+  }
+}
+
 function score(badge,person){
     var badgeArr = [];
     var arr = [];
     var arr2 = [];
   _.forOwn(users, function(value, key) {
-    if(badge in value.users[person]){
-      badgeArr.push(value.name);
+    for (var i = 0; i < value.badges.length; i++) {
+      if(badge === value.badges[i].name){
+        badgeArr.push(value.name);
+      }
     }
   });
   for (var i = 0; i < badgeArr.length ; i++) {
-    var newPerson = people[badgeArr[i]];
+    var newPerson = users[badgeArr[i]].name;
     arr.push(similarity(person, newPerson));
   }
   arr2 = arr.reduce(function(previousValue, currentValue, index, array) {
@@ -110,7 +125,7 @@ function hasJob(name, badge) {
 }
 
 function peopleDoing(badgeName) {
-  var whoHas = badges[badgeName].who();
+  var whoHasit = badges[badgeName].who();
   var result = [];
   for (var name in whoHasit) {
     result.push(whoHasit[name]);
@@ -127,4 +142,28 @@ function jobsDoneBy(name) {
     // arr.push(badges[badgeName]);
   }
   return arr;
+}
+
+function recommendJobsFor(person){
+  var arr = [];
+  var points = [];
+  var final = [];
+  _.forOwn(badges, function(value, key) {
+    for (var i = 0; i < users[person].badges.length; i++) {
+      if(!(key in users[person].badges)){
+        arr.push(key);
+      }
+    }
+  });
+  for (var i = 0; i < arr.length ; i++) {
+    var job = arr[i];
+    points.push(score(job, person));
+  }
+    points.sort(function compareNumbers(a, b) {
+    return b - a;
+  });
+  for ( var j = 0; j < points.length; j++ ) {
+    final.push({badges: arr[j], score: points[j]});
+  }
+return final;
 }
