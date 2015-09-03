@@ -59,7 +59,7 @@ function hasJob(name, badge) {
 }
 
 function peopleDoing(badgeName) {
-  var whoHas = badges[badgeName].who();
+  var whoHasit = badges[badgeName].who();
   var result = [];
   for (var name in whoHasit) {
     result.push(whoHasit[name]);
@@ -106,15 +106,15 @@ function intersectJobs(nameA, nameB) {
 
 // receives two person objects and calculates a number from 0 to 1 representing the similarity of their jobs
 function similarity(personA, personB) {
-  var first = Object.keys(personA.jobs).length;
-  var second =  Object.keys(personB.jobs).length;
+  var first = Object.keys(users[personA].badges).length;
+  var second =  Object.keys(users[personB].badges).length;
   var combine = intersectJobs(personA, personB).length;
   if (first > second) {
     console.log(combine/ first);
-    return (combine / first);
+    return _.round(combine / first);
   } else {
     console.log(combine / second);
-    return (combine / second);
+    return _.round(combine / second);
   }
 }
 
