@@ -5,6 +5,7 @@ var usernames = [ 'patharryux' , 'jasonsiren' , 'nathanbennett3' , 'erikphansen'
 var badgeNames = [];
 var users = {};
 var badges = {};
+var who = [];
 
 usernames.forEach(function(element) {
     $.getJSON('http:/teamtreehouse.com/'+element+'.json').
@@ -23,40 +24,24 @@ function importUser(data, textStatus, jqXHR){
 //badges
   for(var x = 0; x < badgeNames.length; x++){
     badges[badgeNames[x]] = { name: badgeNames[x],
-                              who: who()
+                              who: who,
                             };
 }
 
-function who(){
-  var obj = {};
-for(var person in users){
-  for (var i = 0; i < users[person].badges.length; i++) {
-  //   if(users[person].badges[i] == this.name){
-  //       return obj;
-  // }
-}
-}
-return this;
+  function who(){
+    var badge = [];
 
-}
+    for(person in users){
+      for (var i = 0; i < users[person].badges.length; i++) {
+        if(users[person].badges[i]['name'] == this.name){
+        badge.push(users[person]);
+        }
+      }
+    }
+    return badge;
+  }
 
-// function badgeArr(badgeName){
-//   var obj = {};
-// for (var i = 0; i < Object.keys(users).length; i++) {
-//   for (var x = 0; i < array.length; i++) {
-//     array[i]
-//   }
-//   if(users.badges[i])
-//
-// }
-// }
-
-
-
-  // users[data.name] = data.name;
-  // job[data.];
 	buildUser(data);
-  // buildJobs(data);
 }
 
 
