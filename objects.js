@@ -70,3 +70,61 @@ $img = $('<img>' , { src: element.icon_url ,
 // console.log($img);
 $img.appendTo($div);
 }
+
+
+//>>>>>>>>>>>> Data Processing Functions <<<<<<<<<<<<<<<<<<
+
+function intersectJobs(nameA, nameB) {
+  var first = Object.keys(users[nameA]['badges']);
+  var second = Object.keys(users[nameB]['badges']);
+  return(_.intersection(first, second));
+}
+
+function score(badge,person){
+    var badgeArr = [];
+    var arr = [];
+    var arr2 = [];
+  _.forOwn(users, function(value, key) {
+    if(badge in value.users[person]){
+      badgeArr.push(value.name);
+    }
+  });
+  for (var i = 0; i < badgeArr.length ; i++) {
+    var newPerson = people[badgeArr[i]];
+    arr.push(similarity(person, newPerson));
+  }
+  arr2 = arr.reduce(function(previousValue, currentValue, index, array) {
+    return previousValue + currentValue;
+  });
+  return _.round(arr2 , 2);
+}
+
+function hasJob(name, badge) {
+//   return people[person].jobs[jobs] ? true : false;
+  for(var i = 0; i <users[name].badges.length; i++ ){
+  if (users[name].badges[i].name == badge) {
+    return true;
+  }
+  }
+  return false;
+}
+
+function peopleDoing(badgeName) {
+  var whoHas = badges[badgeName].who();
+  var result = [];
+  for (var name in whoHasit) {
+    result.push(whoHasit[name]);
+    //result.push(whoDoesIt)
+  }
+  return result;
+}
+//
+function jobsDoneBy(name) {
+  var arr = [];
+  var badgeObjects = users[name].badges;
+  for (var badgeName in badgeObjects) {
+    arr.push(badgeObjects[badgeName]);
+    // arr.push(badges[badgeName]);
+  }
+  return arr;
+}

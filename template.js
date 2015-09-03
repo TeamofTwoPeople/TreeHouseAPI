@@ -48,32 +48,36 @@ function hasJob(person, jobs) {
   }
 }
 
-function jasHob(personObj, jobsObj) {
-  var here = personObj.jobs;
-  var jobName = jobsObj.job;
-  // check via name (jobName in here);
-  // check via obj
-  return (here[jobName] === jobsObj );
+function hasJob(name, badge) {
+//   return people[person].jobs[jobs] ? true : false;
+  for(var i = 0; i <users[name].badges.length; i++ ){
+  if (users[name].badges[i].name == badge) {
+    return true;
+  }
+  }
+  return false;
 }
 
-function peopleDoing(jobName) {
-  var whoDoesIt = jobs[jobName].who;
+function peopleDoing(badgeName) {
+  var whoHas = badges[badgeName].who();
   var result = [];
-  for (var name in whoDoesIt) {
-    result.push(people[name]);
+  for (var name in whoHasit) {
+    result.push(whoHasit[name]);
     //result.push(whoDoesIt)
   }
   return result;
 }
 
-function jobsDoneBy(personName) {
+function jobsDoneBy(name) {
   var arr = [];
-  var task = people[personName].jobs;
-  for (var jobname in task) {
-    arr.push(jobs[jobname]);
+  var badgeObjects = users[name].badges;
+  for (var badgeName in badgeObjects) {
+    arr.push(badgeObjects[badgeName]);
+    // arr.push(badges[badgeName]);
   }
   return arr;
 }
+
 
 // another way to do it
 // function intersectJobs(nameA, nameB) {
@@ -92,8 +96,8 @@ function jobsDoneBy(personName) {
 
 // Data Processing
 function intersectJobs(nameA, nameB) {
-  var first = Object.keys(nameA.jobs);
-  var second = Object.keys(nameB.jobs);
+  var first = Object.keys(users[nameA]['badges']);
+  var second = Object.keys(users[nameB]['badges']);
   return(_.intersection(first, second));
 }
 
@@ -179,5 +183,3 @@ function maxLength(strings) {
 function sizeColumns(rowNames, colNames) {
 
 }
-
-console.log(mom.jobs);
