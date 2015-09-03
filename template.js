@@ -160,7 +160,7 @@ function recommendJobsFor(person){
   }
 return final;
 }
-console.log(recommendJobsFor(mom));
+// console.log(recommendJobsFor(mom));
 
 // Display Functions
 
@@ -179,3 +179,5 @@ function maxLength(strings) {
 function sizeColumns(rowNames, colNames) {
 
 }
+
+console.log(mom.jobs);
