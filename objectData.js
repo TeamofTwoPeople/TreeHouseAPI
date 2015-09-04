@@ -81,6 +81,7 @@ function recommendBadgesFor(person){
   users[person].badges.map(function(element, index, array){
   personJobs.push(element.name);
   });
+console.log(personJobs);
 
   _.forOwn(badges, function(value, key) {
     if(personJobs.indexOf(key) == -1){
@@ -97,7 +98,25 @@ function recommendBadgesFor(person){
     return b - a;
   });
   for ( var j = 0; j < points.length; j++ ) {
-    final.push({badges: arr[j], score: points[j], url: urlArray[j]});
+    final.push({badges: arr[j], score: points[j], icon_url: urlArray[j]});
   }
+  buildRecommend(final, person);
   return final;
+  }
+
+
+  function buildRecommend(final, person){
+    var elementName = ('#'+person.replace(/\s/g, ''));
+    $div = $('<div>', { id: person.replace(/\s/g, '') + "_recomended",
+                        class: 'recommend_box'
+                      });
+    $h1 = $('<h1>', { id: person,}).text(person);
+    console.log(elementName);
+
+    $h1.appendTo($div);
+    final.forEach(buildImages);
+    $div.appendTo(elementName);
+
+    // $h1 = $('<h1>', { id: data.name,}).text(data.name);
+
   }
