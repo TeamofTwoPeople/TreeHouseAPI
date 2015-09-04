@@ -32,6 +32,7 @@ function importUser(data, textStatus, jqXHR){
                               url: badgeUrl[x]
                             };
 }
+console.log(data);
 
   function who(){
     var badge = [];
@@ -51,7 +52,7 @@ function importUser(data, textStatus, jqXHR){
 
 
 function buildUser(data){
-  $div = $('<div>', { id: data.profile_name,
+  $div = $('<div>', { id: data.name.replace(/\s/g, ''),
                       class: 'user_box'
                     });
 

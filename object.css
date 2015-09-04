@@ -25,7 +25,17 @@ h1 {
 
 }
 
+
 div {
   padding-left: 15px;
   padding-bottom: 15px;
+}
+
+.recommend_box {
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: rgb(237, 230, 255);
+  width: 60%;
+  margin: 3% 10% 3% 10%;
+
 }
