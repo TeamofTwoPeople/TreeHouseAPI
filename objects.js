@@ -194,7 +194,7 @@ console.log(personJobs);
 
     $h1.appendTo($div);
     final.forEach(buildImages);
-    $( $div ).after(elementName);
+    $div.appendTo(elementName);
 
     // $h1 = $('<h1>', { id: data.name,}).text(data.name);
 
