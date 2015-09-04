@@ -1,6 +1,6 @@
 // mycode.js
 // var _ = require("lodash");
-var usernames = [ 'patharryux' , 'jasonsiren' , 'nathanbennett3' , 'erikphansen' , 'donguyen' , 'adamtaitano' , 'jeffdunn' , 'kathleenkent' , 'tybrenner', 'josephfraley2', 'mkelley2', 'bosuntom', 'jenniferminetree' ];
+var usernames = [ 'patharryux' , 'jasonsiren' , 'nathanbennett3', 'donguyen' , 'adamtaitano' , 'jeffdunn' , 'kathleenkent' , 'tybrenner', 'josephfraley2', 'mkelley2', 'bosuntom', 'jenniferminetree' ];
 
 var badgeNames = [];
 var users = {};
@@ -50,28 +50,43 @@ function importUser(data, textStatus, jqXHR){
 	buildUser(data);
 }
 
-
 function buildUser(data){
   $div = $('<div>', { id: data.name.replace(/\s/g, ''),
                       class: 'user_box'
                     });
 
-  $h1 = $('<h1>', { id: data.name,}).text(data.name);
+  $header = $('<div>', { id: data.name,
+                         class: 'title', //CHANGED
+                       });
 
-  $button = $('<button>', { id:data.name + "button",
-                            class:'butt',}).text('Recommended');
+  $gravtar =$('<img>', { src: data.gravatar_url,
+                         id: data.name + 'image',
+                         class: 'gravatar'
+                       });
+
+  $headingText =$('<span>', { class: 'headingTitle'
+
+                            }).text(data.name + '-' + data.points.total);
+
+
+                            $button = $('<button>', { id:data.name + "button",
+                                                      class:'butt',}).text(data.name + '-' + data.points.total);
 
 $(document).ready(function(){
-  $button.click(function() {
-    recommendBadgesFor(data.name);
-  });
+    $button.click(function() {
+      recommendBadgesFor(data.name);
+    });
 });
 
-  $button.appendTo($h1);
-  $h1.appendTo($div);
+  $button.appendTo($header);
+  $header.appendTo($div); // CHANGED
+  // $headingText.appendTo($header); //CHANGED
+  $gravtar.appendTo($header); //CHANGED
+
   data.badges.forEach(buildImages);
   $div.appendTo('body');
 }
+
 
 function buildImages(element, index, array){
 
