@@ -1,41 +1,41 @@
 img {
   height: 80px;
-  width: 70px;
+  width: 75px;
 }
-
 h1 {
   color: rgb(242, 197, 204);
   text-align: left;
   text-align: center;
   border-bottom: 1px solid rgb(225, 167, 231)
-
 }
-
 .badge:hover {
   background: yellow;
 }
-
 .user_box {
   border-radius: 10px;
   border: 2px solid black;
   background-color: rgb(237, 230, 255);
-  width: 60%;
-  margin: 3% 10% 3% 10%;
-  align-self: center;
-
-}
-
-
-div {
+  width: 80%;
+  margin: 3% 0% 3% 10%;
+  float: left;
+  display: inline-block;
   padding-left: 15px;
   padding-bottom: 15px;
+
 }
-
+/*div {
+  padding-left: 15px;
+  padding-bottom: 15px;
+}*/
 .recommend_box {
-  border-radius: 10px;
-  border: 2px solid black;
+  border-top: 2px solid black
   background-color: rgb(237, 230, 255);
-  width: 60%;
-  margin: 3% 10% 3% 10%;
+  width: 100%%;
+  margin: 0% 0% 0% 0%;
+}
+Add Comment Colla
 
+.butt {
+  display: block;
+  clear: both;
 }
