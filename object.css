@@ -24,3 +24,8 @@ h1 {
   align-self: center;
 
 }
+
+div {
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
