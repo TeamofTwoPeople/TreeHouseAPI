@@ -6,6 +6,7 @@ var badgeNames = [];
 var users = {};
 var badges = {};
 var who = [];
+badgeUrl = [];
 
 usernames.forEach(function(element) {
     $.getJSON('http:/teamtreehouse.com/'+element+'.json').
@@ -17,14 +18,18 @@ function importUser(data, textStatus, jqXHR){
 
 	for(var i = 0; i < data.badges.length ; i++){
     users[data.name] = {name: data.name,
-                        badges: data.badges
+                        badges: data.badges,
                         };
+
   badgeNames.push(data.badges[i].name);
+  badgeUrl.push(data.badges[i].icon_url);
+
 }
 //badges
   for(var x = 0; x < badgeNames.length; x++){
     badges[badgeNames[x]] = { name: badgeNames[x],
                               who: who,
+                              url: badgeUrl[x]
                             };
 }
 
@@ -144,17 +149,25 @@ function jobsDoneBy(name) {
   return arr;
 }
 
-function recommendJobsFor(person){
+function recommendBadgesFor(person){
   var arr = [];
   var points = [];
   var final = [];
+  var personJobs = [];
+  urlArray = [];
+
+  users[person].badges.map(function(element, index, array){
+  personJobs.push(element.name);
+  });
+console.log(personJobs);
+
   _.forOwn(badges, function(value, key) {
-    for (var i = 0; i < users[person].badges.length; i++) {
-      if(!(key in users[person].badges)){
-        arr.push(key);
-      }
+    if(personJobs.indexOf(key) == -1){
+      arr.push(key);
+      urlArray.push(badges[key].url);
     }
   });
+
   for (var i = 0; i < arr.length ; i++) {
     var job = arr[i];
     points.push(score(job, person));
@@ -163,7 +176,7 @@ function recommendJobsFor(person){
     return b - a;
   });
   for ( var j = 0; j < points.length; j++ ) {
-    final.push({badges: arr[j], score: points[j]});
+    final.push({badges: arr[j], score: points[j], url: urlArray[j]});
   }
-return final;
-}
+  return final;
+  }
