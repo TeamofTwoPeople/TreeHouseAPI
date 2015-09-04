@@ -108,8 +108,14 @@ function recommendBadgesFor(person){
   function buildRecommend(final, person){
     var elementName = ('#'+person.replace(/\s/g, ''));
     $div = $('<div>', { id: person.replace(/\s/g, '') + "_recomended",
-                        class: 'recommend_box'
+                        class: 'recommend_box',
                       });
+    // CHANGED
+    $('body').on('click', '.recommend_box', function(){
+      $(this).remove();
+    });
+    // CHANGED
+
     $h1 = $('<h1>', { id: person,}).text('Recommended:');
     $h1.appendTo($div);
     final.forEach(buildImages);

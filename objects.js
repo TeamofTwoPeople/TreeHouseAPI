@@ -61,9 +61,11 @@ function buildUser(data){
   $button = $('<button>', { id:data.name + "button",
                             class:'butt',}).text('Recommended');
 
+$(document).ready(function(){
   $button.click(function() {
     recommendBadgesFor(data.name);
   });
+});
 
   $button.appendTo($h1);
   $h1.appendTo($div);
