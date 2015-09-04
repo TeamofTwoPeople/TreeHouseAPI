@@ -32,6 +32,7 @@ function importUser(data, textStatus, jqXHR){
                               url: badgeUrl[x]
                             };
 }
+console.log(data);
 
   function who(){
     var badge = [];
@@ -51,7 +52,7 @@ function importUser(data, textStatus, jqXHR){
 
 
 function buildUser(data){
-  $div = $('<div>', { id: data.profile_name,
+  $div = $('<div>', { id: data.name.replace(/\s/g, ''),
                       class: 'user_box'
                     });
 
@@ -176,7 +177,25 @@ console.log(personJobs);
     return b - a;
   });
   for ( var j = 0; j < points.length; j++ ) {
-    final.push({badges: arr[j], score: points[j], url: urlArray[j]});
+    final.push({badges: arr[j], score: points[j], icon_url: urlArray[j]});
   }
+  buildRecommend(final, person);
   return final;
+  }
+
+
+  function buildRecommend(final, person){
+    var elementName = ('#'+person.replace(/\s/g, ''));
+    $div = $('<div>', { id: person.replace(/\s/g, '') + "_recomended",
+                        class: 'recommend_box'
+                      });
+    $h1 = $('<h1>', { id: person,}).text(person);
+    console.log(elementName);
+
+    $h1.appendTo($div);
+    final.forEach(buildImages);
+    $( $div ).after(elementName);
+
+    // $h1 = $('<h1>', { id: data.name,}).text(data.name);
+
   }
