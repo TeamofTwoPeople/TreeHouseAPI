@@ -32,7 +32,7 @@ function importUser(data, textStatus, jqXHR){
                               url: badgeUrl[x]
                             };
 }
-console.log(data);
+// console.log(data);
 
   function who(){
     var badge = [];
@@ -58,8 +58,14 @@ function buildUser(data){
 
   $h1 = $('<h1>', { id: data.name,}).text(data.name);
 
+  $button = $('<button>', { id:data.name + "button",
+                            class:'butt',}).text('Recommended');
 
+  $button.click(function() {
+    recommendBadgesFor(data.name);
+  });
 
+  $button.appendTo($h1);
   $h1.appendTo($div);
   data.badges.forEach(buildImages);
   $div.appendTo('body');

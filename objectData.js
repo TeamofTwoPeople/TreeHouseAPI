@@ -81,7 +81,7 @@ function recommendBadgesFor(person){
   users[person].badges.map(function(element, index, array){
   personJobs.push(element.name);
   });
-console.log(personJobs);
+// console.log(personJobs);
 
   _.forOwn(badges, function(value, key) {
     if(personJobs.indexOf(key) == -1){
@@ -110,13 +110,10 @@ console.log(personJobs);
     $div = $('<div>', { id: person.replace(/\s/g, '') + "_recomended",
                         class: 'recommend_box'
                       });
-    $h1 = $('<h1>', { id: person,}).text(person);
-    console.log(elementName);
-
+    $h1 = $('<h1>', { id: person,}).text('Recommended:');
     $h1.appendTo($div);
     final.forEach(buildImages);
+    // $div.appendTo(elementName);
     $div.appendTo(elementName);
-
     // $h1 = $('<h1>', { id: data.name,}).text(data.name);
-
   }
